@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class EchoClient {
 	private static final String SERVER_IP = "117.16.40.176";
-	private static final int SERVER_PORT = 6000;
+	private static final int SERVER_PORT = 6060;
 	
 	public static void main(String[] args) {
 		Socket socket = null;
