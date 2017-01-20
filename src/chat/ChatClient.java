@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ChatClient {
-	private static final String SERVER_ADDRESS = "192.168.1.2";
+	private static final String SERVER_ADDRESS = "117.16.40.176";
 	private static final int SERVER_PORT = 9090;
 	
 	public static void main(String[] args) {
@@ -44,17 +44,8 @@ public class ChatClient {
 			//System.out.println( data );
 			
 			// 6. ChatClientRecevieThread 시작
-			//Thread thread = new ChatClientReceiveThread(bufferedReader);
-			//thread.start();
-			final BufferedReader br = bufferedReader;
-			new Thread( new Runnable() {
-
-				@Override
-				public void run() {
-					
-				}
-				
-			}).start();
+			Thread thread = new ChatClientReceiveThread(bufferedReader);
+			thread.start();
 			
 			// 7. 키보드 입력 처리
 			while (true) {
