@@ -123,15 +123,14 @@ public class ChatServerProcessThread extends Thread {
 	
 	private void broadcast( String data ) {
 		synchronized( listPrintWriters ) {
-	//		for( PrintWriter printWriter : listPrintWriters ) {
-	//           printWriter.println( data );		
-	//		}
+		
 			int count = listPrintWriters.size();
 			for( int i = 0; i < count; i++ ) {
 				PrintWriter printWriter = listPrintWriters.get( i );
 				printWriter.println( data );
 				printWriter.flush();
 			}
+
 		}
 	}
 }
