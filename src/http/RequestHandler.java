@@ -48,6 +48,7 @@ public class RequestHandler extends Thread {
 			} else {
 				//POST, DELETE, PUT
 				// 심플 웹 서버에서는 잘못된 요청으로 처리( 400 )
+				response400Error( os, tokens[2] );
 			}
 			
 			// 예제 응답입니다.
@@ -72,6 +73,31 @@ public class RequestHandler extends Thread {
 		}			
 	}
 	
+	public void response400Error(
+		OutputStream os,
+		String protocol )
+		throws IOException {
+		
+		File file = new File( "./webapp/error/400.html" );
+		byte[] body = Files.readAllBytes( file.toPath() );
+		
+		os.write( (protocol + " 400 Bad Request\r\n").getBytes( "utf-8") );
+		os.write( "\r\n".getBytes( "utf-8" ) );
+		os.write( body );
+	}
+	
+	public void response404Error( 
+		OutputStream os, 
+		String protocol )
+		throws IOException {
+		File file = new File( "./webapp/error/404.html" );
+		byte[] body = Files.readAllBytes( file.toPath() );
+		
+		os.write( ( protocol + " 404 File Not Found\r\n" ).getBytes( "utf-8" ) );
+		os.write( "\r\n".getBytes( "utf-8" ) );
+		os.write( body );
+	}
+	
 	public void responseStaticResource(
 			OutputStream os,
 			String url,
@@ -87,7 +113,7 @@ public class RequestHandler extends Thread {
 		if( file.exists() == false ) {
 			// error 처리
 			// 404 -> File Not Found
-			//response404Error( os, protocol );
+			response404Error( os, protocol );
 			return;
 		}
 		
